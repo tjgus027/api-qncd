@@ -1,0 +1,3068 @@
+{
+  "info": {
+    "_postman_id": "ccf6e1c9-bfb5-4783-b44a-0b1be28043bd",
+    "name": "Kiply",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "계정",
+      "item": [
+        {
+          "name": "테스트 액세스 토큰 발급",
+          "id": "18e575e8-c928-485a-8ffc-5e178272e084",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/test/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "test",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "미리보기 로그인",
+          "id": "ed1caa77-0c94-4be4-8537-403bfbf89e9c",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"secretKey\":\"preview-pass-2026!-ADD-MORE-WORDS\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/preview-login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "preview-login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "리프레시 토큰 재발급",
+          "id": "06e5fe6d-e37c-4fd2-8415-52e7b3f7b718",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/refresh",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "refresh"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "로그아웃",
+          "id": "1032f452-c785-4a9b-8ede-5673572c7fa8",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{\baccessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/logout",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "logout"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "토큰 인증이 필요한 API 요청 테스트",
+          "id": "5fa02953-24fd-40f2-85ea-a3f36316e597",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "jwt",
+              "jwt": [
+                {
+                  "key": "secret",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "algorithm",
+                  "value": "HS256",
+                  "type": "string"
+                },
+                {
+                  "key": "isSecretBase64Encoded",
+                  "value": false,
+                  "type": "boolean"
+                },
+                {
+                  "key": "payload",
+                  "value": "{}",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "headerPrefix",
+                  "value": "Bearer",
+                  "type": "string"
+                },
+                {
+                  "key": "queryParamKey",
+                  "value": "token",
+                  "type": "string"
+                },
+                {
+                  "key": "header",
+                  "value": "{}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"user-123\",\n  \"clientId\": \"frontend-app\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/auth/kmc/request",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "auth",
+                "kmc",
+                "request"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "정보확인(임시)",
+          "id": "f5604525-229d-4d79-9735-fe2cda333080",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/member/info",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "member",
+                "info"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "유저 정보 조회(어드민)",
+          "id": "56709e81-4da2-4262-96d4-f0e8a59314fd",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/member/list",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "member",
+                "list"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "유저 계정 탈퇴",
+          "id": "941fb520-66f2-4589-9181-e7764514805f",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/member",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "member"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "구글 로그인",
+          "id": "f318e178-c5f6-418c-a2a2-c90714e3a2a7",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/auth/google/callback?code=4%2F0Aci98E98kpFq3YsNec3IRZH75h1kwIPd_Dz-SRYJWqP6C6L3jXw5w6LLSqWpPTW2U6LPwg&redirectUrl=http://localhost:8080/auth/google/callback",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "google",
+                "callback"
+              ],
+              "query": [
+                {
+                  "key": "code",
+                  "value": "4%2F0Aci98E98kpFq3YsNec3IRZH75h1kwIPd_Dz-SRYJWqP6C6L3jXw5w6LLSqWpPTW2U6LPwg"
+                },
+                {
+                  "key": "redirectUrl",
+                  "value": "http://localhost:8080/auth/google/callback"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "3a7b3832-9a28-411e-9b45-04c64549bdf5"
+    },
+    {
+      "name": "리워드",
+      "item": [
+        {
+          "name": "리워드 지갑 합계 조회",
+          "id": "ffeff638-84ed-4409-aaa9-e7e61b6934f9",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}/reward/balances",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "reward",
+                "balances"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "리워드 지갑 내역 조회",
+          "id": "efcadac0-ae8e-45cc-8c26-b0e976637b6c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/reward/history?page=0&size=20&sort=occurredAt,desc",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "reward",
+                "history"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "20"
+                },
+                {
+                  "key": "sort",
+                  "value": "occurredAt,desc"
+                },
+                {
+                  "key": "type",
+                  "value": "DEBIT",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "리워드 지갑 총액",
+          "id": "ad3973fa-f2d4-45c4-84f1-b3c4f1be2621",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{\baccessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/reward/summary",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "reward",
+                "summary"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "20",
+                  "disabled": true
+                },
+                {
+                  "key": "sort",
+                  "value": "occurredAt,desc",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "\b리워드지급",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "90751349-0507-44ed-ba9b-5d0da727ad22",
+                "exec": [
+                  "// === 1) 변수들 ===",
+                  "const method = pm.request.method;",
+                  "",
+                  "// 에러가 났던 getPathWithQuery() 대신 이 방식을 사용하세요.",
+                  "// pm.request.url.getPath()는 \"/api/partner/issue-token\" 형태를 반환합니다.",
+                  "const path = pm.request.url.getPath();",
+                  "const timestamp = Math.floor(Date.now() / 1000);",
+                  "const nonce = crypto.randomUUID();",
+                  "const secretKey = pm.variables.get(\"partner_secret\");",
+                  "const partnerCode = pm.variables.get(\"partner_code\");",
+                  "",
+                  "if (!secretKey) {",
+                  "    throw new Error(\"partner_secret is not set.\");",
+                  "}",
+                  "",
+                  "// === 2) 서버 canonical 과 동일하게 구성 ===",
+                  "const canonical =",
+                  "    timestamp + \"\\n\" +",
+                  "    nonce + \"\\n\" +",
+                  "    method + \"\\n\" +",
+                  "    path;",
+                  "",
+                  "console.log(\"canonical:\\n\" + canonical);",
+                  "",
+                  "// === 3) HMAC 계산 ===",
+                  "const signature = CryptoJS.HmacSHA256(canonical, secretKey)",
+                  "    .toString(CryptoJS.enc.Hex);",
+                  "",
+                  "console.log(\"signature =\", signature);",
+                  "",
+                  "// === 4) 헤더에 넣기 ===",
+                  "pm.request.headers.add({ key: \"X-Partner-Code\", value: partnerCode });",
+                  "pm.request.headers.add({ key: \"X-Partner-Timestamp\", value: timestamp.toString() });",
+                  "pm.request.headers.add({ key: \"X-Partner-Nonce\", value: nonce });",
+                  "pm.request.headers.add({ key: \"X-Partner-Signature\", value: signature });",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "id": "97f56ee5-6d39-4120-ad71-f3bdc6444e15",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"idempotencyKey\": \"reward-meta-{{$randomUUID}}\",\n    \"partnerUserId\": \"test-8ef2e03f-2b6a-4e29-abaf-6494d894c229\",\n    \"assetSymbol\": \"POINT\",\n    \"chain\":\"SEPOLIA\",\n    \"amount\": \"100000\",\n    \"reason\": \"테스트\",\n    \"metadata\": {\n        \"gender\": \"M\",\n        \"age\": \"28\",\n        \"region\": \"SEOUL_GANGNAM\",\n        \"merchant\": \"STARBUCKS_KANGNAM\",\n        \"amount\": \"10.5\",\n        \"campaignId\": \"CAMP_2026_01\",\n        \"externalTxId\": \"ext-tx-{{$randomInt}}\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/reward/issue",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "reward",
+                "issue"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "플랫폼 리워드 수동 지급",
+          "id": "5682f03c-0f36-4d3e-b941-52913ec69cc5",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"idempotencyKey\": \"reward-meta-{{$randomUUID}}\",\n    \"userId\": \"testUser01\",\n    \"assetSymbol\": \"MATIC\",\n    \"chain\":\"AMOY\",\n    \"amount\": \"{{$randomPrice}}\",\n    \"reason\": \"수동 지급 테스트1231\",\n    \"metadata\": {\n        \"gender\": \"M\",\n        \"age\": \"28\",\n        \"region\": \"SEOUL_GANGNAM\",\n        \"merchant\": \"STARBUCKS_KANGNAM\",\n        \"amount\": \"10.5\",\n        \"campaignId\": \"CAMP_2026_01\",\n        \"externalTxId\": \"ext-tx-{{$randomInt}}\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/reward/manual-grant",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "reward",
+                "manual-grant"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "리워드 출금",
+          "id": "edd36b01-ab58-4e30-9ff2-0b7574fe1fe0",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJHT09HTEUtMTEzMTkxOTc0Njk3Mjg2NjUzMTYxIiwiaWF0IjoxNzcxNDY1NTAyLCJleHAiOjE3NzE0NjkxMDIsImp0aSI6IjM5YmRjY2YwLTY4OGQtNDJjZS04MzkzLTdmMmY4MjkxM2U1OCIsInJvbGVzIjpbIkFETUlOIl0sInN0YXR1cyI6IkFDVElWRSJ9.LwWpqBkGypoeNzHgee8B112XlAufixDgbZ9rr_4Is3Y",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"idempotencyKey\":\"{{$randomUUID}}\",\n    \"amount\": 0.004,\n    \"tokenSymbol\": \"ETH\",\n    \"chain\": \"ETHEREUM\",\n    \"destinationAddress\": \"0x1506a60e538d886fa55364bae9183634ad7c23eb\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/reward/withdraw",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "reward",
+                "withdraw"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "리워드 출금 전 사전 계산",
+          "id": "6ccf6401-1e9e-4c0a-968c-f95588247eec",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJHT09HTEUtMTEzMTkxOTc0Njk3Mjg2NjUzMTYxIiwiaWF0IjoxNzcxNDY1NTAyLCJleHAiOjE3NzE0NjkxMDIsImp0aSI6IjM5YmRjY2YwLTY4OGQtNDJjZS04MzkzLTdmMmY4MjkxM2U1OCIsInJvbGVzIjpbIkFETUlOIl0sInN0YXR1cyI6IkFDVElWRSJ9.LwWpqBkGypoeNzHgee8B112XlAufixDgbZ9rr_4Is3Y",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"idempotencyKey\":\"{{$randomUUID}}\",\n   \"amount\": 0.001,\n  \"tokenSymbol\": \"ETH\",\n  \"chain\": \"SEPOLIA\",\n  \"destinationAddress\": \"0x2955717bbb7aa1fceac7495c7e28b06a090f8636\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/reward/withdraw/estimate",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "reward",
+                "withdraw",
+                "estimate"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "리워드 출금 상태 조회",
+          "id": "bd2386d7-a45a-4b1c-a062-e44087e90154",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}/reward/withdraw/6",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "reward",
+                "withdraw",
+                "6"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "리워드 출금 전체 조회(어드민)",
+          "id": "ff2aee83-9537-4fc1-a829-b55e3b78a325",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/reward/withdraw/list",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "reward",
+                "withdraw",
+                "list"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "리워드 출금 환불 처리(어드민)",
+          "id": "49cb5b2b-8a49-4f2a-904f-679d3325cede",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/reward/withdraw/refund/4",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "reward",
+                "withdraw",
+                "refund",
+                "4"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "리워드 출금 수동 승인(어드민, 팬딩인것만)",
+          "id": "46e2e314-9a0e-4083-bbfc-9e0219b9816c",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/reward/withdraw/approve/41",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "reward",
+                "withdraw",
+                "approve",
+                "41"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "리워드 출금 수동 취소(어드민, 팬딩인것만)",
+          "id": "e23c554b-d3c0-4a0e-96f3-dcdc56dd5207",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/admin/reward/withdraw/reject/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "reward",
+                "withdraw",
+                "reject",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "리워드 출금 배칭 수동 승인(어드민, 팬딩)",
+          "id": "20aad441-6cd8-4fb4-a461-786dc6e51b5c",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"ids\": [8,9,10,11,12,13],\n    \"idempotencyKey\": \"{{$randomUUID}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/reward/withdraw/approve-batch",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "reward",
+                "withdraw",
+                "approve-batch"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "출금 가스비 수익성 통계(어드민)",
+          "id": "25b40244-b160-460d-aba0-2c961d09d1df",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/reward/withdraw/statistics/gas-profitability",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "reward",
+                "withdraw",
+                "statistics",
+                "gas-profitability"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "050ab6e3-86b1-48d5-b08f-f9d305bd1e19"
+    },
+    {
+      "name": "블록체인",
+      "item": [
+        {
+          "name": "지갑 연결용 메세지 생성",
+          "id": "ce334155-e2e7-4960-8b20-5f4d7ae0afdf",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/blockchain/link/message?address=0x3814b344c270f3c5801d191d3f494c9e6da1402b",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "blockchain",
+                "link",
+                "message"
+              ],
+              "query": [
+                {
+                  "key": "address",
+                  "value": "0x3814b344c270f3c5801d191d3f494c9e6da1402b"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "지갑 연결",
+          "id": "ad2ccc63-f42a-431d-97a2-147c0e180277",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address\": \"0x3814b344c270f3c5801d191d3f494c9e6da1402b\",\n  \"chainType\": \"ETHEREUM\",\n  \"message\": \"QCND Wallet Verification\\n\\nAddress: 0x3814b344c270f3c5801d191d3f494c9e6da1402b\\nNonce: 1863383\\nTimestamp: 1774318327\\n\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/blockchain/link",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "blockchain",
+                "link"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "지갑 토큰 조회",
+          "id": "cbfccd43-d6d8-4039-911e-fde4b26dbaa9",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJLQUtBTy00NTQ5NTc4MTM5IiwiaWF0IjoxNzY4OTYwMTgwLCJleHAiOjE3Njg5ODE3ODAsImp0aSI6ImZkMTA4MWZkLWY1YzUtNGFmNS04MDYwLWY2Y2M5MjJkNjhjNSIsInJvbGVzIjpbIkFETUlOIl0sInN0YXR1cyI6IkFDVElWRSJ9.-rc0pBbchK_C7C9P5wfZgWfHyjMcZwXLnufYXUA8aEo",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/blockchain/tokens",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "blockchain",
+                "tokens"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "지갑 삭제",
+          "id": "ca336b7f-cc49-4f94-97a7-dfc7231831d3",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/blockchain?address=0x3814b344c270f3c5801d191d3f494c9e6da1402b",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "blockchain"
+              ],
+              "query": [
+                {
+                  "key": "address",
+                  "value": "0x3814b344c270f3c5801d191d3f494c9e6da1402b"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "토큰 가격 상세 조회",
+          "id": "26e2a65f-06a7-4247-8620-88fc38052650",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/blockchain/token/price/:symbol?chainCode=SEPOLIA&range=month",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "blockchain",
+                "token",
+                "price",
+                ":symbol"
+              ],
+              "query": [
+                {
+                  "key": "chainCode",
+                  "value": "SEPOLIA"
+                },
+                {
+                  "key": "range",
+                  "value": "month",
+                  "description": " today,\n    week,\n    month,\n    three_months,\n    six_months,\n    year,\n    all,"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "symbol",
+                  "value": "ETH"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e291d16f-627f-4ac9-bf8a-0714557a2a58",
+              "name": "토큰 가격 상세 조회",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{accessToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/blockchain/token/price/ETH?chainCode=SEPOLIA",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "blockchain",
+                    "token",
+                    "price",
+                    "ETH"
+                  ],
+                  "query": [
+                    {
+                      "key": "chainCode",
+                      "value": "SEPOLIA"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\n    \"code\": \"OK\",\n    \"message\": \"SUCCESS\",\n    \"data\": {\n        \"symbol\": \"ETH\",\n        \"chainCode\": \"SEPOLIA\",\n        \"priceKrw\": 3197562.8590806057,\n        \"history\": [\n            {\n                \"timestamp\": \"2026-04-20T00:00:00Z\",\n                \"price\": 3318625.46\n            },\n            {\n                \"timestamp\": \"2026-04-21T00:00:00Z\",\n                \"price\": 3402796.23\n            },\n            {\n                \"timestamp\": \"2026-04-22T00:00:00Z\",\n                \"price\": 3460693.48\n            },\n            {\n                \"timestamp\": \"2026-04-23T00:00:00Z\",\n                \"price\": 3512704.84\n            },\n            {\n                \"timestamp\": \"2026-04-24T00:00:00Z\",\n                \"price\": 3452883.06\n            },\n            {\n                \"timestamp\": \"2026-04-25T00:00:00Z\",\n                \"price\": 3419554.76\n            },\n            {\n                \"timestamp\": \"2026-04-26T00:00:00Z\",\n                \"price\": 3424840.42\n            },\n            {\n                \"timestamp\": \"2026-04-27T00:00:00Z\",\n                \"price\": 3497851.36\n            },\n            {\n                \"timestamp\": \"2026-04-28T00:00:00Z\",\n                \"price\": 3395095.27\n            },\n            {\n                \"timestamp\": \"2026-04-29T00:00:00Z\",\n                \"price\": 3372203.15\n            },\n            {\n                \"timestamp\": \"2026-04-30T00:00:00Z\",\n                \"price\": 3352504.87\n            },\n            {\n                \"timestamp\": \"2026-05-01T00:00:00Z\",\n                \"price\": 3328548.54\n            },\n            {\n                \"timestamp\": \"2026-05-02T00:00:00Z\",\n                \"price\": 3376889.74\n            },\n            {\n                \"timestamp\": \"2026-05-03T00:00:00Z\",\n                \"price\": 3414113.1\n            },\n            {\n                \"timestamp\": \"2026-05-04T00:00:00Z\",\n                \"price\": 3420742.53\n            },\n            {\n                \"timestamp\": \"2026-05-05T00:00:00Z\",\n                \"price\": 3466154.87\n            },\n            {\n                \"timestamp\": \"2026-05-06T00:00:00Z\",\n                \"price\": 3481871.51\n            },\n            {\n                \"timestamp\": \"2026-05-07T00:00:00Z\",\n                \"price\": 3397844.8\n            },\n            {\n                \"timestamp\": \"2026-05-08T00:00:00Z\",\n                \"price\": 3335189.07\n            },\n            {\n                \"timestamp\": \"2026-05-09T00:00:00Z\",\n                \"price\": 3372772.35\n            },\n            {\n                \"timestamp\": \"2026-05-10T00:00:00Z\",\n                \"price\": 3402523.29\n            },\n            {\n                \"timestamp\": \"2026-05-11T00:00:00Z\",\n                \"price\": 3463003.74\n            },\n            {\n                \"timestamp\": \"2026-05-12T00:00:00Z\",\n                \"price\": 3451908.04\n            },\n            {\n                \"timestamp\": \"2026-05-13T00:00:00Z\",\n                \"price\": 3396714.41\n            },\n            {\n                \"timestamp\": \"2026-05-14T00:00:00Z\",\n                \"price\": 3364201.72\n            },\n            {\n                \"timestamp\": \"2026-05-15T00:00:00Z\",\n                \"price\": 3409144.12\n            },\n            {\n                \"timestamp\": \"2026-05-16T00:00:00Z\",\n                \"price\": 3329647.03\n            },\n            {\n                \"timestamp\": \"2026-05-17T00:00:00Z\",\n                \"price\": 3265490.31\n            },\n            {\n                \"timestamp\": \"2026-05-18T00:00:00Z\",\n                \"price\": 3192751.1\n            },\n            {\n                \"timestamp\": \"2026-05-19T00:00:00Z\",\n                \"price\": 3178598.82\n            }\n        ]\n    },\n    \"requestId\": \"1379cc59-2b39-4dc3-9a13-821b6d17136f\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "토큰 정보 상세 조회",
+          "id": "d96779ea-79fc-489c-afe9-b24f90711603",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/blockchain/token/info/USDT?chainCode=ETHEREUM",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "blockchain",
+                "token",
+                "info",
+                "USDT"
+              ],
+              "query": [
+                {
+                  "key": "chainCode",
+                  "value": "ETHEREUM"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "지갑 활동 기록",
+          "id": "d3909c48-d435-4e20-8147-59c3361d39a4",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{\baccessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"txHash\":\"0xd912fb2b7d9a3a0adc1e7557f572042ee46b17fe2128638768a70c75c1679a67\",\n    \"chainId\":80002,\n    \"tokenSymbol\":\"MATIC\",\n    \"fromAddress\":\"0x2955717bbb7aa1fceac7495c7e28b06a090f8636\",\n    \"toAddress\":\"0x3814B344C270f3C5801D191D3F494c9e6DA1402B\",\n    \"amount\":\"0.01\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/blockchain/tokens/history/report",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "blockchain",
+                "tokens",
+                "history",
+                "report"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "지갑 활동 내역 조회",
+          "id": "10cc2746-4a98-4146-a4b8-c59d46415107",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}/blockchain/tokens/history",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "blockchain",
+                "tokens",
+                "history"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "DEBIT",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "블록체인 토큰 생성",
+          "id": "100ada1d-6a4d-48f8-a8e3-508e17120f25",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": {\n    \"symbol\": \"WETH\",\n    \"decimals\": 18,\n    \"cmcId\": 2396\n  },\n  \"chain\": {\n    \"code\": \"ETHEREUM\",\n    \"chainId\": 1,\n    \"networkType\": \"MAINNET\",\n    \"nativeSymbol\": \"ETH\",\n    \"rpcUrl\": \"https://mainnet.infura.io/v3/8cc4092e4ece4e5eb5ebb8ad4f868d87\",\n    \"explorerUrl\": \"https://etherscan.io\",\n    \"withdrawGasLimit\": 21000\n  },\n  \"mapping\": {\n    \"contractAddress\": \"0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2\",\n    \"priority\": 1\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/blockchain/registerTokenWithChain",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "blockchain",
+                "registerTokenWithChain"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "서버에서 지원하는 토큰 심볼 리스트",
+          "id": "3eafcf0f-e0b5-471c-89d1-4f6232025bcc",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/blockchain/token/support-list",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "blockchain",
+                "token",
+                "support-list"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "체인에 지원하는 토큰 리스트",
+          "id": "e1a9d29a-aea8-47b8-811f-97a737dd4a15",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/blockchain/token/support-list/ETHEREUM",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "blockchain",
+                "token",
+                "support-list",
+                "ETHEREUM"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "서버 지갑 핫 월렛 잔액(어드민)",
+          "id": "a47d1c1c-61d2-4a4b-a7f0-42a6d6447308",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/blockchain/hot-wallets/balances?tokenSymbol=MATIC&chainCode=AMOY",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "blockchain",
+                "hot-wallets",
+                "balances"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "15",
+                  "disabled": true
+                },
+                {
+                  "key": "walletName",
+                  "value": "메",
+                  "disabled": true
+                },
+                {
+                  "key": "tokenSymbol",
+                  "value": "MATIC"
+                },
+                {
+                  "key": "chainCode",
+                  "value": "AMOY"
+                },
+                {
+                  "key": "page",
+                  "value": "0",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "10",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "캐시 리로드",
+          "id": "cac571e8-e0f1-4397-9e0c-4925ccd10066",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/blockchain/reload",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "blockchain",
+                "reload"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "토큰 CMC 싱크(어드민)",
+          "id": "67f45d7b-3ec4-48a0-9ac0-a414520d5be8",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/blockchain/tokens/sync-metadata",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "blockchain",
+                "tokens",
+                "sync-metadata"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "d842269b-af41-464a-ad43-c5ba76290a7e"
+    },
+    {
+      "name": "파트너",
+      "item": [
+        {
+          "name": "\b파트너 추가(어드민)",
+          "id": "b052f770-e19d-4ceb-8a47-1a6c8bba89e9",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"partnerCode\" : \"test\",\n    \"name\" : \"테스트\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/partner/add",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "partner",
+                "add"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "\b파트너 링크 토큰 생성 요청",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "e6ebcf5c-0b2a-48ef-98d5-ef969f4b68b7",
+                "exec": [
+                  "// === 1) 변수들 ===",
+                  "const method = pm.request.method;",
+                  "",
+                  "// 에러가 났던 getPathWithQuery() 대신 이 방식을 사용하세요.",
+                  "// pm.request.url.getPath()는 \"/api/partner/issue-token\" 형태를 반환합니다.",
+                  "const path = pm.request.url.getPath();",
+                  "const timestamp = Math.floor(Date.now() / 1000);",
+                  "const nonce = crypto.randomUUID();",
+                  "const secretKey = pm.variables.get(\"partner_secret\");",
+                  "const partnerCode = pm.variables.get(\"partner_code\");",
+                  "",
+                  "if (!secretKey) {",
+                  "    throw new Error(\"partner_secret is not set.\");",
+                  "}",
+                  "",
+                  "// === 2) 서버 canonical 과 동일하게 구성 ===",
+                  "const canonical =",
+                  "    timestamp + \"\\n\" +",
+                  "    nonce + \"\\n\" +",
+                  "    method + \"\\n\" +",
+                  "    path;",
+                  "",
+                  "console.log(\"canonical:\\n\" + canonical);",
+                  "",
+                  "// === 3) HMAC 계산 ===",
+                  "const signature = CryptoJS.HmacSHA256(canonical, secretKey)",
+                  "    .toString(CryptoJS.enc.Hex);",
+                  "",
+                  "console.log(\"signature =\", signature);",
+                  "",
+                  "// === 4) 헤더에 넣기 ===",
+                  "pm.request.headers.add({ key: \"X-Partner-Code\", value: partnerCode });",
+                  "pm.request.headers.add({ key: \"X-Partner-Timestamp\", value: timestamp.toString() });",
+                  "pm.request.headers.add({ key: \"X-Partner-Nonce\", value: nonce });",
+                  "pm.request.headers.add({ key: \"X-Partner-Signature\", value: signature });",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "id": "a07ef1be-88b5-4375-bce9-d440707cf505",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"partnerUserId\": \"test-{{$randomUUID}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/partner/issue-token",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "partner",
+                "issue-token"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "파트너 고객 연동(다이렉트 방식)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "30519c59-6471-4184-951e-ab20a2cd5cf7",
+                "exec": [
+                  "// === 1) 변수들 ===",
+                  "const method = pm.request.method;",
+                  "",
+                  "// 에러가 났던 getPathWithQuery() 대신 이 방식을 사용하세요.",
+                  "// pm.request.url.getPath()는 \"/api/partner/issue-token\" 형태를 반환합니다.",
+                  "const path = pm.request.url.getPath();",
+                  "const timestamp = Math.floor(Date.now() / 1000);",
+                  "const nonce = crypto.randomUUID();",
+                  "const secretKey = pm.variables.get(\"partner_secret\");",
+                  "const partnerCode = pm.variables.get(\"partner_code\");",
+                  "",
+                  "if (!secretKey) {",
+                  "    throw new Error(\"partner_secret is not set.\");",
+                  "}",
+                  "",
+                  "// === 2) 서버 canonical 과 동일하게 구성 ===",
+                  "const canonical =",
+                  "    timestamp + \"\\n\" +",
+                  "    nonce + \"\\n\" +",
+                  "    method + \"\\n\" +",
+                  "    path;",
+                  "",
+                  "console.log(\"canonical:\\n\" + canonical);",
+                  "",
+                  "// === 3) HMAC 계산 ===",
+                  "const signature = CryptoJS.HmacSHA256(canonical, secretKey)",
+                  "    .toString(CryptoJS.enc.Hex);",
+                  "",
+                  "console.log(\"signature =\", signature);",
+                  "",
+                  "// === 4) 헤더에 넣기 ===",
+                  "pm.request.headers.add({ key: \"X-Partner-Code\", value: partnerCode });",
+                  "pm.request.headers.add({ key: \"X-Partner-Timestamp\", value: timestamp.toString() });",
+                  "pm.request.headers.add({ key: \"X-Partner-Nonce\", value: nonce });",
+                  "pm.request.headers.add({ key: \"X-Partner-Signature\", value: signature });",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "id": "d75288f3-1913-46c7-9de1-e123d2755bff",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"linkToken\":\"v1.eyJwYXJ0bmVyQ29kZSI6InRlc3QiLCJwYXJ0bmVyVXNlcklkIjoidGVzdC00ODg0MjQxZS1iNTUzLTRjYTYtOTFiYi04NTY4N2EzNTMxZGMiLCJleHAiOjE3NzI3ODAxMTN9.a3e4407a79c8ce62a9e2fe624e1600ddd9a29099f4cfc228c7d1534900259d66\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/partner/link",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "partner",
+                "link"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "파트너 유저 연결 확인",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "e5e52589-0a0b-4676-b9c6-64328234d887",
+                "exec": [
+                  "// === 1) 변수들 ===",
+                  "const method = pm.request.method;",
+                  "",
+                  "// 에러가 났던 getPathWithQuery() 대신 이 방식을 사용하세요.",
+                  "// pm.request.url.getPath()는 \"/api/partner/issue-token\" 형태를 반환합니다.",
+                  "const path = pm.request.url.getPath();",
+                  "const timestamp = Math.floor(Date.now() / 1000);",
+                  "const nonce = crypto.randomUUID();",
+                  "const secretKey = pm.variables.get(\"partner_secret\");",
+                  "const partnerCode = pm.variables.get(\"partner_code\");",
+                  "",
+                  "if (!secretKey) {",
+                  "    throw new Error(\"partner_secret is not set.\");",
+                  "}",
+                  "",
+                  "// === 2) 서버 canonical 과 동일하게 구성 ===",
+                  "const canonical =",
+                  "    timestamp + \"\\n\" +",
+                  "    nonce + \"\\n\" +",
+                  "    method + \"\\n\" +",
+                  "    path;",
+                  "",
+                  "console.log(\"canonical:\\n\" + canonical);",
+                  "",
+                  "// === 3) HMAC 계산 ===",
+                  "const signature = CryptoJS.HmacSHA256(canonical, secretKey)",
+                  "    .toString(CryptoJS.enc.Hex);",
+                  "",
+                  "console.log(\"signature =\", signature);",
+                  "",
+                  "// === 4) 헤더에 넣기 ===",
+                  "pm.request.headers.add({ key: \"X-Partner-Code\", value: partnerCode });",
+                  "pm.request.headers.add({ key: \"X-Partner-Timestamp\", value: timestamp.toString() });",
+                  "pm.request.headers.add({ key: \"X-Partner-Nonce\", value: nonce });",
+                  "pm.request.headers.add({ key: \"X-Partner-Signature\", value: signature });",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "id": "82280251-15f3-4164-977a-bf4c123f425e",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/partner/link-check?partnerUserId=user_3169",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "partner",
+                "link-check"
+              ],
+              "query": [
+                {
+                  "key": "linkToken",
+                  "value": "v1.eyJwYXJ0bmVyQ29kZSI6InRlc3QiLCJwYXJ0bmVyVXNlcklkIjoidGVzdC02YmQwMTU4NS1hZDdmLTQ3ZjgtOWEyZi04NjkxMjY4ZTdhMjQiLCJleHAiOjE3NzE0NjYxMzl9.cd0dacb5df007f2390482a32eb213cb0218d9a3059130cf2a003b5e31ce9d5b7",
+                  "disabled": true
+                },
+                {
+                  "key": "userId",
+                  "value": "jaemin@xealabs.com",
+                  "disabled": true
+                },
+                {
+                  "key": "partnerUserId",
+                  "value": "user_3169"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "파트너 계정 생성",
+          "id": "c9538f92-bbc3-4c64-9d0f-0a0e0e403920",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"loginId\":\"test01\",\n    \"password\":\"1234\",\n    \"name\":\"test\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/partner/account",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "partner",
+                "account"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "파트너 로그인",
+          "id": "75bb0b10-e5fe-4b20-854a-1555c266188b",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"loginId\":\"test@xealabs.com\",\n    \"password\":\"wodk2025!\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/partner/account/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "partner",
+                "account",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "파트너 RT 재발급",
+          "id": "f2a21d8b-c1af-410a-a755-dcb3e9faff96",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"refreshToken\": \"{{refreshToken}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/partner/account/refresh",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "partner",
+                "account",
+                "refresh"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "파트너 내 계정 상세 정보",
+          "id": "3c962b5e-82a2-477a-a178-1b92c3521e33",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/partner/account/info",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "partner",
+                "account",
+                "info"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "파트너 직원 목록 조회",
+          "id": "8a31563d-dd69-4bf1-ba98-a067cfd3afeb",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/partner/account/list",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "partner",
+                "account",
+                "list"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "test",
+                  "disabled": true
+                },
+                {
+                  "key": "role",
+                  "value": "STAFF",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "파트너 권한 유형 목록",
+          "id": "ec5aa824-4ee1-4242-a697-94eb21ac75fd",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/partner/account/roles",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "partner",
+                "account",
+                "roles"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "파트너 직원 정보 수정 (권한/상태 등)",
+          "id": "719c2231-7def-445a-8cfc-669f5d908f32",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"accountId\": 2,\n    \"role\":\"MANAGER\",\n    \"isActive\":true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/partner/account",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "partner",
+                "account"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "파트너사 연결 고객 목록 조회",
+          "id": "54e280cf-22e6-4273-816c-bae45f42381a",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/partner/customer",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "partner",
+                "customer"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "파트너 대시보드",
+          "id": "86faa355-b1db-40eb-8681-f2f0d601a90a",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYXN0ZXIiLCJpYXQiOjE3NzMwMzQyODEsImV4cCI6MTc3MzAzNzg4MSwianRpIjoiY2I3YzQ2YzUtYzI5Ny00NzE1LTlhYzgtYjhkOWEzZWEzMWY3IiwicGFydG5lcklkIjoxLCJwYXJ0bmVyQ29kZSI6Imtha2FvUGF5Iiwicm9sZXMiOlsiTUFTVEVSIl0sInR5cGUiOiJQQVJUTkVSIn0.hP9Sqzk3BGP-RK9iewYLXrEcx4E-WPqrgzJIfNUh2dQ",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/partner/statistics/summary",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "partner",
+                "statistics",
+                "summary"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "파트너 기간별 차트",
+          "id": "db4b50d5-57e6-4bba-939b-a3751b6a1d87",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/partner/statistics/trend?startDate=2026-02-01&status=PROCESSED&endDate=2026-04-28&intervalUnit=MONTH",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "partner",
+                "statistics",
+                "trend"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2026-02-01"
+                },
+                {
+                  "key": "reason",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "status",
+                  "value": "PROCESSED"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2026-04-28"
+                },
+                {
+                  "key": "intervalUnit",
+                  "value": "MONTH"
+                },
+                {
+                  "key": "assetSymbol",
+                  "value": "MATIC",
+                  "disabled": true
+                },
+                {
+                  "key": "chainCode",
+                  "value": "SEPOLIA",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "파트너 리워드 지급 목록 조회",
+          "id": "3f91b656-5e89-4a32-adeb-065cc4cbd14e",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/partner/reward/history?chainCode=AMOY&assetSymbol=MATIC&=",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "partner",
+                "reward",
+                "history"
+              ],
+              "query": [
+                {
+                  "key": "chainCode",
+                  "value": "AMOY"
+                },
+                {
+                  "key": "assetSymbol",
+                  "value": "MATIC"
+                },
+                {
+                  "key": "",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "10b11faa-cdf1-4abf-9c27-d5ab4e5e13ac"
+    },
+    {
+      "name": "알람",
+      "item": [
+        {
+          "name": "개인 알람 발송",
+          "id": "5cacf6ec-4583-41e5-b372-913e44e96d2f",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"type\":\"DEFAULT\",\n    \"message\":\"보내기 알람 1234\",\n    \"data\":{}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/notification/user/A1132e27b-5027-4a56-9c1c-cdc21432340d",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "notification",
+                "user",
+                "A1132e27b-5027-4a56-9c1c-cdc21432340d"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "전체 알람 발송",
+          "id": "8d5deabc-b738-44b8-b5c1-eae97c7bc500",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"NOTICE\",\n  \"message\": \"테스스ㅡ스스트ㅡ\",\n  \"data\": {\n    \"noticeId\": 23,\n    \"deeplink\": \"qcnd://board/notice/23\"\n  }\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/notification/broadcast",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "notification",
+                "broadcast"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "알람 내역 조회",
+          "id": "33de69f0-8c3b-49ce-8e24-3581147f9981",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/notification/list",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "notification",
+                "list"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "알림 토큰 및 설정 동기화",
+          "id": "60f93ace-12f5-4f8e-9dab-669c856d7340",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{\baccessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"sendToken\":\"ExponentPushToken[7ivEauGOXTxdpMA7bi7_A8]\",\n    \"deviceType\":\"IOS\",\n    \"isEnabled\":true,\n    \"isTransactionEnabled\":true,\n    \"isMarketingEnabled\":true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/notification/registerOrUpdateNotification",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "notification",
+                "registerOrUpdateNotification"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "알림 설정 값 가져오기",
+          "id": "b1050426-538c-4de4-898a-c0471a6b72d4",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/notification/setting",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "notification",
+                "setting"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "알림 읽음 처리",
+          "id": "1d3fa872-fe56-43c1-8d66-4fbbfbe712d9",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{\baccessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/notification/read/650b4186-1c61-4b8f-b62d-f98d336f6a3f",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "notification",
+                "read",
+                "650b4186-1c61-4b8f-b62d-f98d336f6a3f"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "04c9ae79-4b92-446c-817d-079bab7d98f3"
+    },
+    {
+      "name": "주소록",
+      "item": [
+        {
+          "name": "주소록 조회",
+          "id": "ef87d210-5c58-4e50-ae21-d9620e7c4731",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/contact",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "contact"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "주소록 등록",
+          "id": "028657d3-1da9-4fb9-84e0-3e3e6fcb4c2b",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{\baccessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"alias\":\"다른사람의이름이나별명별칭호\",\n    \"tokenSymbol\":\"ETH\",\n    \"address\":\"0x3814b344c270f3c5801d191d3f494c9e6da1402b\",\n    \"memo\":\"테스트\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/contact",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "contact"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "\b주소록 수정",
+          "id": "96d67805-822c-4ade-b9c8-55e89311fb72",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{\baccessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"alias\":\"제목변경\",\n    \"tokenSymbol\":\"MATIC\",\n    \"address\":\"0x3814b344c270f3c5801d191d3f494c9e6da1402b\",\n    \"memo\":\"변경테스트\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/contact/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "contact",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "주소록 삭제",
+          "id": "389e030e-4616-4d1f-8f15-1ff7f62e3fd4",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{\baccessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/contact/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "contact",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "144ce5a6-c571-4d9a-85d7-b21a71aceb08"
+    },
+    {
+      "name": "공지사항",
+      "item": [
+        {
+          "name": "공지사항 목록 조회",
+          "id": "71abc19d-8d97-4e13-ada6-c6d90262f1af",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{\baccessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/board/notice?page=0&size=10&sort=createdAt,desc",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "board",
+                "notice"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "sort",
+                  "value": "createdAt,desc"
+                },
+                {
+                  "key": "",
+                  "value": null,
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "공지사항 단일 조회",
+          "id": "ce848735-2b8f-48d4-b272-8e2f2f2b6732",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{\baccessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/board/notice/2",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "board",
+                "notice",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "공지사항 등록",
+          "id": "a70b00b0-5930-4e22-9030-33466d9de6ca",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{\baccessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\":\"test\",\n    \"content\":\"testcontent\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/board/notice",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "board",
+                "notice"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "공지사항 수정",
+          "id": "70f683e4-c0b7-471a-a081-c451d9ef06c2",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{\baccessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\":\"수정\",\n    \"content\":\"tnwjd2\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/board/notice/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "board",
+                "notice",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "공지사항 삭제",
+          "id": "4d6afac4-9342-4712-a087-0467918fef4a",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{\baccessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/board/notice/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "board",
+                "notice",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "64928fe0-4193-43d1-8bc9-a19260e0e564"
+    },
+    {
+      "name": "문의",
+      "item": [
+        {
+          "name": "문의 내역 조회",
+          "id": "1916b7ac-b3ea-4373-8360-5e9982acb8e1",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/support",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "support"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "문의 상세 조회",
+          "id": "4fb67614-6eb3-4f5c-8f5a-33920408a790",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{\baccessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/support/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "support",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "문의 등록",
+          "id": "42491ffe-52b3-47b3-b200-d1151743a1ad",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"type\":\"REQUEST\",\n    \"email\":\"mtyu02345@gmail.com\",\n    \"content\":\"다른사람이멜로<html><body><a>test</a></body></html> 테스트\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/support",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "support"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "문의 취소",
+          "id": "e0d8de95-e668-495c-a975-6f347a96a21a",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{\baccessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/support/cancel/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "support",
+                "cancel",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "문의 유형 목록",
+          "id": "6c83456d-3e72-434a-8519-d29ac2e5a16c",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/support/types",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "support",
+                "types"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "\b문의 상태 목록",
+          "id": "347297bc-283d-4e7c-9800-722aae8198f1",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{\baccessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/support/statuses",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "support",
+                "statuses"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "문의 전체 조회(어드민)",
+          "id": "cc33c337-bb37-4d87-b480-463ca9320485",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/support",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "support"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "문의 상세 조회(어드민)",
+          "id": "c4bd4da3-3712-42ab-b9cf-bb8a51e5cd42",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{\baccessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/support/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "support",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "문의 답변 등록 및 수정(어드민)",
+          "id": "8817ee25-ee64-439f-a8b3-429d99c6a0a0",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"answer\":\"문의 답변해드렸습니다. ^^\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/support/10",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "support",
+                "10"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "웹 문의 등록",
+          "id": "e7259008-183f-4d8d-93ae-b6b0c8870e77",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\":\"test\",\n    \"type\":\"WEB_PARTNER\",\n    \"email\":\"mtyu02345@gmail.com\",\n    \"content\":\"대충 파트너쉽 원한다는 내용...\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/web/support",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "web",
+                "support"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "ac184531-b44d-4a78-ad8e-7b84fd8b5293"
+    },
+    {
+      "name": "이벤트",
+      "item": [
+        {
+          "name": "이벤트 목록 조회",
+          "id": "6109bf77-c042-497a-8713-cff9cfa9dc35",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/event",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "event"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "이벤트 상세 조회",
+          "id": "e09e6133-0687-4904-82ff-d4620d2ffe98",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/event/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "event",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "이벤트 등록",
+          "id": "b150a2da-a028-4e96-9cb0-e454904f0d35",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/event",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "event"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "e417d15b-6995-43c4-9ab9-9befa779bdb8"
+    },
+    {
+      "name": "약관",
+      "item": [
+        {
+          "name": "활성 약관 목록 조회",
+          "id": "43959cca-c711-449c-a6ff-53c434684088",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/terms",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "terms"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "약관 등록",
+          "id": "4a4cecb2-56ec-464d-8fc4-8bee4e7d9006",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"termsCode\":\"\",\n    \"title\":\"\",\n    \"mandatory\":false,\n    \"enforcementDate\":\"2026-05-01\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/term",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "term"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "ee918882-2014-437d-9562-4cfcd77e908b"
+    },
+    {
+      "name": "기타",
+      "item": [
+        {
+          "name": "파일 업로드",
+          "id": "a9c7f1d3-a884-4206-b87e-2462d2cdb98a",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{\baccessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "/Users/qcnd/Downloads/KakaoTalk_Photo_2025-11-14-12-42-35.png"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/file/images",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "file",
+                "images"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "비크립트패스워드생성",
+          "id": "9ab1e53d-6cd4-401a-9f94-2e3637406e3b",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/test/generateBcryptPassword?password=1234",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "test",
+                "generateBcryptPassword"
+              ],
+              "query": [
+                {
+                  "key": "password",
+                  "value": "1234"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ai",
+          "id": "e999668e-7e4b-40bd-8ab1-e2eaec4d0c64",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"prompt\":\"이전 내용 기억하니?\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/ai/stream",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ai",
+                "stream"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "3f16a53b-1381-4538-a61b-b138aee65bc7"
+    }
+  ],
+  "variable": [
+    {
+      "id": "212607f0-b905-48bc-8a3f-e162072aec33",
+      "key": "base_url",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}
